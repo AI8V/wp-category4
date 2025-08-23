@@ -98,7 +98,8 @@ function createCourseCard(course) {
                   src="${imageBase}-large.jpg"
                   alt="${course.title}"
                   onerror="this.onerror=null; this.src='${finalFallbackImage}';"
-                  width="400" height="210">
+                  width="400" height="210"
+                  loading="lazy" fetchpriority="low" decoding="async">
           </picture>
           <span class="badge bg-${COURSE_DATA.categories[course.category]?.color || 'success'} course-category">${course.category}</span>
         </div>
@@ -130,6 +131,18 @@ function createCourseCard(course) {
     </div>
   `;
 }
+
+function optimizeVisibleImages() {
+      const cards = qsa('.course-card');
+      const visibleCards = cards.slice(0, 3);
+      visibleCards.forEach(card => {
+        const img = qs('img', card);
+        if (img) {
+          img.loading = 'eager';
+          img.fetchPriority = 'high';
+        }
+      });
+    }
 
 
   // === MAIN FILTER & SORT SYSTEM ===
@@ -390,6 +403,7 @@ function createCourseCard(course) {
             courseElement.style.animationDelay = `${index * 0.1}s`;
             container.appendChild(courseElement);
           });
+          optimizeVisibleImages();
         }
 
         // Update results text
