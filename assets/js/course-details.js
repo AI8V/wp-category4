@@ -226,8 +226,9 @@ document.addEventListener("DOMContentLoaded", () => {
              <source srcset="${imageBase}-small.webp 800w, ${imageBase}-large.webp 1200w" sizes="(max-width: 991px) 95vw, 50vw" type="image/webp">
              <source srcset="${imageBase}-small.jpg 800w, ${imageBase}-large.jpg 1200w" sizes="(max-width: 991px) 95vw, 50vw" type="image/jpeg">
              <img src="${imageBase}-large.jpg" alt="${course.title}" class="img-fluid rounded shadow"
-                  loading="lazy" width="600" height="400"
-                  onerror="this.onerror=null; this.src='${fallbackImage}';">
+                  width="600" height="400"
+                  onerror="this.onerror=null; this.src='${fallbackImage}';"
+                  loading="eager" fetchpriority="high" decoding="async">
           </picture>
         </div>
         <div class="col-lg-6">
