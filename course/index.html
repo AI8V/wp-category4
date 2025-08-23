@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+<!-- 2. الأوبن جراف (Open Graph - لـ Facebook, LinkedIn, etc.) -->
+<meta property="og:title" content="Online Courses | Your Brand Name">
+<meta property="og:description" content="Explore our extensive catalog of top-rated online courses in business, health, and technology.">
+<meta property="og:type" content="website"> <!-- هذه الصفحة هي جزء من موقع وليست مقالاً أو منتجاً -->
+<meta property="og:url" content="https://your-domain.com/course/">
+<meta property="og:image" content="https://your-domain.com/assets/img/og-image-courses.jpg"> <!-- صورة عامة وجذابة لقسم الكورسات -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Your Brand Name">
+
+<!-- 3. تويتر كارد (Twitter Cards - لتويتر) -->
+<meta name="twitter:card" content="summary_large_image"> <!-- مهم جداً لعرض صورة كبيرة -->
+<meta name="twitter:title" content="Online Courses | Your Brand Name">
+<meta name="twitter:description" content="Explore our extensive catalog of top-rated online courses in business, health, and technology.">
+<meta name="twitter:image" content="https://your-domain.com/assets/img/og-image-courses.jpg"> <!-- تويتر يستخدم نفس صورة الأوبن جراف -->
+<meta name="twitter:site" content="@YourTwitterHandle"> <!-- حسابك على تويتر (اختياري) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Online Courses in Web Development, Health &amp; More | Your Brand Name</title>
+    <meta name="description" content="Explore our extensive catalog of online courses. Find top-rated courses in business, health, design, and technology. Start learning today!">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/bs-theme-overrides.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Available Online Courses",
+  "description": "Browse our collection of high-quality online courses in various fields.",
+  "itemListElement": [
+    // سيتم توليد هذا الجزء عبر حلقة تكرارية (loop) على بيانات الكورسات
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Course",
+        "url": "https://your-domain.com/course/course-details/?id=1",
+        "name": "Introduction LearnPress - LMS Complete Guide",
+        "description": "Learn the fundamentals of LearnPress LMS and how to create engaging online courses",
+        "provider": {
+          "@type": "Organization",
+          "name": "Your Brand Name"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Course",
+        "url": "https://your-domain.com/course/course-details/?id=2",
+        "name": "Health Foundations - Complete Wellness Guide",
+        "description": "Master the basics of health and wellness with practical tips and strategies",
+        "provider": {
+          "@type": "Organization",
+          "name": "Your Brand Name"
+        }
+      }
+    }
+    // ... وهكذا لباقي الكورسات في الصفحة الحالية
+  ]
+}
+</script>
+</head>
+
+<body>
+    <main class="container-fluid my-5">
+        <header class="text-center border-dark my-2">
+            <h1 class="display-4 fw-bold text-warning mb-0">Courses</h1>
+            <nav class="d-flex flex-column justify-content-between" aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center py-2 mb-0">
+                    <li class="breadcrumb-item my-1"><a class="text-decoration-none" href="../index.html" target="_top" rel="external"><span class="h4 my-1">Home</span></a></li>
+                    <li class="breadcrumb-item active my-1" aria-current="page"><span class="text-secondary h4 my-1">Courses</span></li>
+                </ol>
+                <div class="d-lg-none"><button class="btn btn-outline-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-filters" aria-controls="offcanvas-filters"><span class="bi bi-funnel" aria-hidden="true"></span> Filters </button></div>
+            </nav>
+        </header>
+        <section class="border-warning-subtle align-items-start row g-2 border-top">
+            <aside class="col-lg-3 course-sidebar">
+                <h2 class="fw-semibold text-warning h5">Filter</h2>
+                <div class="mb-4"><label class="form-label fw-bold" for="search-input">Search by Title</label><input type="search" aria-label="Search by course title" class="form-control" id="search-input" placeholder="e.g. LearnPress"></div>
+                <h3 class="fw-bold h5 mt-1">Categories</h3>
+                <ul class="list-group" id="categories-list">
+                    <li class="list-group-item mb-1">
+                        <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                            <div class="form-check"><input type="checkbox" class="form-check-input" id="catBusiness" value="Business"><label class="form-check-label ms-2" for="catBusiness">Business</label></div><span>1</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item mb-1">
+                        <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                            <div class="form-check"><input type="checkbox" class="form-check-input" id="catDesign" value="Design"><label class="form-check-label ms-2" for="catDesign">Design</label></div><span>1</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item mb-1">
+                        <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                            <div class="form-check"><input type="checkbox" class="form-check-input" id="catDeveloper" value="Developer"><label class="form-check-label ms-2" for="catDeveloper">Developer</label></div><span>1</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item mb-1">
+                        <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                            <div class="form-check"><input type="checkbox" class="form-check-input" id="catHealth" value="Health"><label class="form-check-label ms-2" for="catHealth">Health</label></div><span>4</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item mb-1">
+                        <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                            <div class="form-check"><input type="checkbox" class="form-check-input" id="catIT" value="IT"><label class="form-check-label ms-2" for="catIT">IT</label></div><span>3</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item mb-1">
+                        <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                            <div class="form-check"><input type="checkbox" class="form-check-input" id="catMarketing" value="Marketing"><label class="form-check-label ms-2" for="catMarketing">Marketing</label></div><span>1</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item mb-1">
+                        <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                            <div class="form-check"><input type="checkbox" class="form-check-input" id="catPhotography" value="Photography"><label class="form-check-label ms-2" for="catPhotography">Photography</label></div><span>2</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item mb-1">
+                        <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                            <div class="form-check"><input type="checkbox" class="form-check-input" id="catTeaching" value="Teaching Online"><label class="form-check-label ms-2" for="catTeaching">Teaching Online</label></div><span>2</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="filter-block mt-4 ms-2" data-key="level">
+                    <h3 class="fw-bold h5">Level</h3>
+                    <ul class="list-unstyled ps-3">
+                        <li class="form-check mb-2"><input type="radio" checked="" class="form-check-input" id="levelAll" name="levelFilter" value="All"><label class="form-check-label ms-1" for="levelAll">All Levels</label></li>
+                        <li class="form-check mb-2"><input type="radio" class="form-check-input" id="levelBeginner" name="levelFilter" value="Beginner"><label class="form-check-label ms-1" for="levelBeginner">Beginner</label></li>
+                        <li class="form-check mb-2"><input type="radio" class="form-check-input" id="levelIntermediate" name="levelFilter" value="Intermediate"><label class="form-check-label ms-1" for="levelIntermediate">Intermediate</label></li>
+                        <li class="form-check mb-2"><input type="radio" class="form-check-input" id="levelAdvanced" name="levelFilter" value="Advanced"><label class="form-check-label ms-1" for="levelAdvanced">Advanced</label></li>
+                    </ul>
+                </div>
+                <h3 class="fw-bold h5 mt-4">Rating</h3>
+                <ul class="list-unstyled rating-filter-list ps-3">
+                    <li class="form-check mb-2"><input type="radio" checked="" class="form-check-input" id="ratingAll" name="ratingFilter" value="0"><label class="form-check-label ms-1" for="ratingAll">All rating</label></li>
+                    <li class="form-check mb-2"><input type="radio" class="form-check-input" id="rating1" name="ratingFilter" value="1"><label class="form-check-label ms-1" for="rating1"><span class="text-warning rating-stars">★<span class="text-secondary">☆☆☆☆</span></span> &amp; up</label></li>
+                    <li class="form-check mb-2"><input type="radio" class="form-check-input" id="rating2" name="ratingFilter" value="2"><label class="form-check-label ms-1" for="rating2"><span class="text-warning rating-stars">★★<span class="text-secondary">☆☆☆</span></span> &amp; up</label></li>
+                    <li class="form-check mb-2"><input type="radio" class="form-check-input" id="rating3" name="ratingFilter" value="3"><label class="form-check-label ms-1" for="rating3"><span class="text-warning rating-stars">★★★<span class="text-secondary">☆☆</span></span> &amp; up</label></li>
+                    <li class="form-check mb-2"><input type="radio" class="form-check-input" id="rating4" name="ratingFilter" value="4"><label class="form-check-label ms-1" for="rating4"><span class="text-warning rating-stars">★★★★<span class="text-secondary">☆</span></span> &amp; up</label></li>
+                </ul>
+                <div class="d-grid gap-2 mt-3"><button class="btn btn-warning fw-semibold" type="button" aria-label="Apply selected filters">Apply</button><button class="btn btn-dark fw-semibold" type="button" aria-label="Reset all filters">Reset</button></div>
+            </aside>
+            <div class="col-lg-9 mt-3 course-content-area">
+                <h2 class="d-lg-none visually-hidden">Course Results</h2>
+                <div class="d-flex justify-content-between pb-3 results-toolbar">
+                    <p class="text-light my-1 ms-2 results-status-text" aria-live="polite">Showing 0-0 of 0 results</p>
+                    <div class="dropdown"><button class="btn btn-dark dropdown-toggle" id="sortDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="sort-label me-2">Average Ratings</span></button>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="sortDropdown">
+                            <li><a class="dropdown-item" href="#">Newly published</a></li>
+                            <li><a class="dropdown-item" href="#">Title a-z</a></li>
+                            <li><a class="dropdown-item" href="#">Title z-a</a></li>
+                            <li><a class="dropdown-item" href="#">Price high to low</a></li>
+                            <li><a class="dropdown-item" href="#">Price low to high</a></li>
+                            <li><a class="dropdown-item" href="#">Popular</a></li>
+                            <li><a class="dropdown-item active" href="#">Average Ratings</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="loading-spinner" class="loading-spinner" style="display:none;" role="status" aria-label="Loading results">
+                    <div class="text-primary spinner-border" role="presentation"></div>
+                </div>
+                <div class="row"></div>
+                <nav aria-label="Course navigation">
+                    <ul class="pagination justify-content-center mt-4 gap-2" id="pagination-bar"></ul>
+                </nav>
+            </div>
+        </section>
+    </main>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-filters" aria-labelledby="offcanvas-filters-label">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvas-filters-label">Filters</h5><button class="btn-close text-reset" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" id="mobileFilters">
+            <div class="mb-4"><label class="form-label fw-bold" for="search-input">Search by Title</label><input type="search" aria-label="Search by course title" class="form-control" id="search-input-mobile" placeholder="e.g. LearnPress"></div>
+            <h3 class="fw-bold mt-1">Categories</h3>
+            <ul class="list-group" id="mobile-categories-list">
+                <li class="list-group-item mb-1">
+                    <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="m-catBusiness" value="Business"><label class="form-check-label ms-2" for="catBusiness">Business</label></div><span>1</span>
+                    </div>
+                </li>
+                <li class="list-group-item mb-1">
+                    <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="m-catDesign" value="Design"><label class="form-check-label ms-2" for="catDesign">Design</label></div><span>1</span>
+                    </div>
+                </li>
+                <li class="list-group-item mb-1">
+                    <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="m-catDeveloper" value="Developer"><label class="form-check-label ms-2" for="catDeveloper">Developer</label></div><span>1</span>
+                    </div>
+                </li>
+                <li class="list-group-item mb-1">
+                    <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="m-catHealth" value="Health"><label class="form-check-label ms-2" for="catHealth">Health</label></div><span>4</span>
+                    </div>
+                </li>
+                <li class="list-group-item mb-1">
+                    <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="m-catIT" value="IT"><label class="form-check-label ms-2" for="catIT">IT</label></div><span>3</span>
+                    </div>
+                </li>
+                <li class="list-group-item mb-1">
+                    <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="m-catMarketing" value="Marketing"><label class="form-check-label ms-2" for="catMarketing">Marketing</label></div><span>1</span>
+                    </div>
+                </li>
+                <li class="list-group-item mb-1">
+                    <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="m-catPhotography" value="Photography"><label class="form-check-label ms-2" for="catPhotography">Photography</label></div><span>2</span>
+                    </div>
+                </li>
+                <li class="list-group-item mb-1">
+                    <div class="fw-semibold text-warning-emphasis d-flex justify-content-between align-items-center">
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="m-catTeaching" value="Teaching Online"><label class="form-check-label ms-2" for="catTeaching">Teaching Online</label></div><span>2</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="filter-block mt-4 ms-2" data-key="level">
+                <h3 class="fw-bold">Level</h3>
+                <ul class="list-unstyled ps-3">
+                    <li class="form-check mb-2"><input type="radio" checked="" class="form-check-input" id="m-levelAll" name="levelFilter" value="All"><label class="form-check-label ms-1" for="levelAll">All Levels</label></li>
+                    <li class="form-check mb-2"><input type="radio" class="form-check-input" id="m-levelBeginner" name="levelFilter" value="Beginner"><label class="form-check-label ms-1" for="levelBeginner">Beginner</label></li>
+                    <li class="form-check mb-2"><input type="radio" class="form-check-input" id="m-levelIntermediate" name="levelFilter" value="Intermediate"><label class="form-check-label ms-1" for="levelIntermediate">Intermediate</label></li>
+                    <li class="form-check mb-2"><input type="radio" class="form-check-input" id="m-levelAdvanced" name="levelFilter" value="Advanced"><label class="form-check-label ms-1" for="levelAdvanced">Advanced</label></li>
+                </ul>
+            </div>
+            <h3 class="fw-bold mt-4">Rating</h3>
+            <ul class="list-unstyled rating-filter-list ps-3">
+                <li class="form-check mb-2"><input type="radio" checked="" class="form-check-input" id="m-ratingAll" name="ratingFilter" value="0"><label class="form-check-label ms-1" for="ratingAll">All rating</label></li>
+                <li class="form-check mb-2"><input type="radio" class="form-check-input" id="m-rating1" name="ratingFilter" value="1"><label class="form-check-label ms-1" for="rating1"><span class="text-warning rating-stars">★<span class="text-secondary">☆☆☆☆</span></span> &amp; up</label></li>
+                <li class="form-check mb-2"><input type="radio" class="form-check-input" id="m-rating2" name="ratingFilter" value="2"><label class="form-check-label ms-1" for="rating2"><span class="text-warning rating-stars">★★<span class="text-secondary">☆☆☆</span></span> &amp; up</label></li>
+                <li class="form-check mb-2"><input type="radio" class="form-check-input" id="m-rating3" name="ratingFilter" value="3"><label class="form-check-label ms-1" for="rating3"><span class="text-warning rating-stars">★★★<span class="text-secondary">☆☆</span></span> &amp; up</label></li>
+                <li class="form-check mb-2"><input type="radio" class="form-check-input" id="m-rating4" name="ratingFilter" value="4"><label class="form-check-label ms-1" for="rating4"><span class="text-warning rating-stars">★★★★<span class="text-secondary">☆</span></span> &amp; up</label></li>
+            </ul>
+            <div class="d-grid gap-2 mt-3"><button class="btn btn-warning fw-semibold" id="mobileApply" type="button" aria-label="Apply selected filters">Apply</button><button class="btn btn-dark fw-semibold" id="mobileReset" type="button" aria-label="Reset all filters">Reset</button></div>
+        </div>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>
