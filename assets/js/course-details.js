@@ -190,12 +190,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. MAIN LOGIC
   // ==================================
   const initializePage = () => {
-    const content = document.getElementById("content");
     const params = new URLSearchParams(window.location.search);
     const courseId = params.get("id");
 
     if (!courseId) {
-      if (content) content.innerHTML = '';
+      const content = document.getElementById("content");
+      if (content) content.innerHTML = '<p class="text-center text-danger">Course ID not specified.</p>';
       showToast('⚠ Course ID not specified.', 'danger');
       return;
     }
@@ -203,7 +203,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const course = COURSE_DATA.courses.find(c => c.id === parseInt(courseId, 10));
 
     if (!course) {
-      if (content) content.innerHTML = '';
+      const content = document.getElementById("content");
+      if (content) content.innerHTML = '<p class="text-center text-warning">The requested course was not found.</p>';
       showToast('⚠️ The requested course was not found.', 'warning');
       return;
     }
@@ -212,16 +213,16 @@ document.addEventListener("DOMContentLoaded", () => {
     updateMetaTags(course);
     // ✅ لا نضيف السكيما هنا - سننتظر البيانات الحقيقية
 
+    // Populate Skeleton
+    const imageContainer = document.getElementById('course-image-container');
+    const descriptionPlaceholder = document.getElementById('course-description-placeholder');
+    const metaInfoContainer = document.getElementById('course-meta-info');
+
+    // --- Image ---
     const fallbackImage = '../../assets/img/course-fallback.jpg';
     const imageBase = `../../${course.image.details}`;
-    const priceDisplay = course.price === 0
-      ? `<span class="text-success">Free</span>`
-      : `<span class="text-success">$${course.price.toFixed(2)}</span>`;
-
-    if (content) {
-      content.innerHTML = `
-      <div class="row">
-        <div class="col-lg-6 mb-4 mb-lg-0">
+    if (imageContainer) {
+        imageContainer.innerHTML = `
           <picture>
              <source srcset="${imageBase}-small.webp 800w, ${imageBase}-large.webp 1200w" sizes="(max-width: 991px) 95vw, 50vw" type="image/webp">
              <source srcset="${imageBase}-small.jpg 800w, ${imageBase}-large.jpg 1200w" sizes="(max-width: 991px) 95vw, 50vw" type="image/jpeg">
@@ -230,28 +231,28 @@ document.addEventListener("DOMContentLoaded", () => {
                   onerror="this.onerror=null; this.src='${fallbackImage}';"
                   loading="eager" fetchpriority="high" decoding="async">
           </picture>
-        </div>
-        <div class="col-lg-6">
-          <h2 class="my-3 text-center text-light">About This Course</h2>
-          <p class="text-warning">${course.description}</p>
+        `;
+    }
+
+    // --- Description ---
+    if (descriptionPlaceholder) {
+        descriptionPlaceholder.classList.remove('placeholder-glow');
+        descriptionPlaceholder.innerHTML = `${course.description}`;
+    }
+
+    // --- Meta Info ---
+    const priceDisplay = course.price === 0
+      ? `<span class="text-success">Free</span>`
+      : `<span class="text-success">$${course.price.toFixed(2)}</span>`;
+    if (metaInfoContainer) {
+        metaInfoContainer.innerHTML = `
           <p class="text-light"><strong>Instructor:</strong> ${course.instructor}</p>
           <p class="text-light"><strong>Category:</strong> ${course.category} | <strong>Level:</strong> ${course.level}</p>
           <p class="text-light"><span class="bi bi-people-fill icon-gold me-2"></span> ${course.students} Students Enrolled | <span class="bi bi-book-fill icon-gold me-2"></span> ${course.lessons} Lessons</p>
           <p class="text-light"><strong>Rating:</strong> <span id="rating-display" class="placeholder-glow"><span class="placeholder col-4"></span></span></p>
           <p class="fs-4 fw-bold text-light">Price: ${priceDisplay}</p>
           <a href="#" class="btn btn-warning btn-lg mt-3" id="enroll-btn">Enroll Now</a>
-          <div class="card mt-4 shadow-sm rating-card-custom">
-            <div class="card-body">
-              <h3 class="h5 card-title">Rate this course</h3>
-              <div class="fs-2" id="user-rating-stars" aria-label="Rate this course">
-                <!-- سيتم ملؤه بواسطة JS -->
-              </div>
-              <small class="form-text text-muted" id="rating-feedback-text"></small>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
+        `;
     }
 
     const ratingStarsContainer = document.getElementById('user-rating-stars');

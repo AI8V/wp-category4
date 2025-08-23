@@ -14,9 +14,34 @@
 <body>
     <main class="container py-4">
         <header id="course-header"></header>
-        <div class="border-warning-subtle border-top" id="content">
-            <div class="text-center py-5">
-                <div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="border-warning-subtle border-top" id="content" style="min-height: 500px;">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0" id="course-image-container">
+                    <div class="placeholder-glow">
+                        <div class="placeholder w-100" style="height: 400px;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6" id="course-details-container">
+                    <h2 class="my-3 text-center text-light">About this Course</h2>
+                    <p class="text-warning placeholder-glow" id="course-description-placeholder">
+                        <span class="placeholder col-7"></span>
+                        <span class="placeholder col-4"></span>
+                        <span class="placeholder col-4"></span>
+                        <span class="placeholder col-6"></span>
+                        <span class="placeholder col-8"></span>
+                    </p>
+                    <div id="course-meta-info">
+                        <!-- Smaller info will be injected here -->
+                    </div>
+                    <div class="card mt-4 shadow-sm rating-card-custom">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">Rate this course</h3>
+                            <div class="fs-2" id="user-rating-stars" aria-label="Rate this course">
+                            </div>
+                            <small class="form-text text-muted" id="rating-feedback-text"></small>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
