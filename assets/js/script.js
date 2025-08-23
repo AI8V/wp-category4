@@ -9,170 +9,10 @@
     DEBOUNCE_DELAY: 300
   };
 
-  // === COURSE DATA ===
-  const COURSE_DATA = {
-    courses: [
-      {
-        id: 1,
-        title: "Introduction LearnPress - LMS Complete Guide",
-        category: "Business",
-        level: "Beginner",
-        price: 0,
-        students: 274,
-        lessons: 12,
-        rating: 4,
-        date: "2025-08-01",
-        description: "Learn the fundamentals of LearnPress LMS and how to create engaging online courses",
-        image: {
-        card: "assets/img/business",
-        details: "assets/img/business-details" 
-      },
-        instructor: "John Doe",
-        tags: ["lms", "wordpress", "education"]
-      },
-      {
-        id: 2,
-        title: "Health Foundations - Complete Wellness Guide",
-        category: "Health",
-        level: "Beginner",
-        price: 49.00,
-        students: 510,
-        lessons: 15,
-        rating: 5,
-        date: "2025-07-15",
-        description: "Master the basics of health and wellness with practical tips and strategies",
-        image: {
-        card: "assets/img/health",
-        details: "assets/img/health-details" 
-      },
-        instructor: "Dr. Sarah Wilson",
-        tags: ["health", "wellness", "nutrition"]
-      },
-      {
-        id: 3,
-        title: "Nutrition Basics - Healthy Living Made Simple",
-        category: "Health",
-        level: "Intermediate",
-        price: 19.99,
-        students: 120,
-        lessons: 8,
-        rating: 3,
-        date: "2025-05-03",
-        description: "Understand nutrition principles and create healthy meal plans",
-        image: {
-        card: "assets/img/health",
-        details: "assets/img/health-details" 
-      },
-        instructor: "Maria Garcia",
-        tags: ["nutrition", "diet", "health"]
-      },
-      {
-        id: 4,
-        title: "Network Mastery - Advanced IT Skills",
-        category: "IT",
-        level: "Advanced",
-        price: 99.00,
-        students: 800,
-        lessons: 32,
-        rating: 4,
-        date: "2025-03-18",
-        description: "Master advanced networking concepts and become an IT professional",
-        image: {
-        card: "assets/img/it",
-        details: "assets/img/it-details" 
-      },
-        instructor: "Michael Chen",
-        tags: ["networking", "it", "technology"]
-      },
-      {
-        id: 5,
-        title: "Digital Marketing Fundamentals",
-        category: "Marketing",
-        level: "Beginner",
-        price: 0,
-        students: 60,
-        lessons: 5,
-        rating: 2,
-        date: "2024-12-01",
-        description: "Learn the basics of digital marketing and online advertising",
-        image: {
-        card: "assets/img/marketing",
-        details: "assets/img/marketing-details" 
-      },
-        instructor: "Alex Johnson",
-        tags: ["marketing", "digital", "advertising"]
-      },
-      {
-        id: 6,
-        title: "Mobile Photography Masterclass",
-        category: "Photography",
-        level: "All Levels",
-        price: 39.00,
-        students: 1200,
-        lessons: 20,
-        rating: 5,
-        date: "2025-08-05",
-        description: "Create stunning photos with just your smartphone",
-        image: {
-        card: "assets/img/photography",
-        details: "assets/img/photography-details" 
-      },
-        instructor: "Lisa Park",
-        tags: ["photography", "mobile", "creativity"]
-      },
-      {
-        id: 7,
-        title: "Color Theory for Designers",
-        category: "Design",
-        level: "Beginner",
-        price: 9.00,
-        students: 20,
-        lessons: 4,
-        rating: 1,
-        date: "2024-10-11",
-        description: "Understand color principles and create harmonious designs",
-        image: {
-        card: "assets/img/design",
-        details: "assets/img/design-details" 
-      },
-        instructor: "David Kim",
-        tags: ["design", "color", "theory"]
-      },
-      {
-        id: 8,
-        title: "JavaScript Essentials - Modern Development",
-        category: "Developer",
-        level: "Intermediate",
-        price: 29.00,
-        students: 340,
-        lessons: 14,
-        rating: 4,
-        date: "2025-01-22",
-        description: "Master JavaScript fundamentals and modern ES6+ features",
-        image: {
-        card: "assets/img/developer",
-        details: "assets/img/developer-details" 
-      },
-        instructor: "Emma Watson",
-        tags: ["javascript", "programming", "web-development"]
-      }
-    ],
-
-    categories: {
-      "Business": { count: 1, color: "warning" },
-      "Health": { count: 2, color: "success" },
-      "IT": { count: 1, color: "primary" },
-      "Marketing": { count: 1, color: "warning" },
-      "Photography": { count: 1, color: "danger" },
-      "Design": { count: 1, color: "secondary" },
-      "Developer": { count: 1, color: "dark" }
-    }
-  };
-
   // === UTILITIES ===
   const qs = (s, r = document) => r.querySelector(s);
   const qsa = (s, r = document) => Array.from(r.querySelectorAll(s));
-  
+
   const debounce = (func, wait) => {
     let timeout;
     return function executedFunction(...args) {
@@ -233,30 +73,30 @@
 function createCourseCard(course) {
   const priceDisplay = course.price === 0 ? 'Free' : `$${course.price.toFixed(2)}`;
   const priceClass = course.price === 0 ? 'text-success' : 'text-primary';
-  
-  const imageBase = `../${course.image.card}`; 
+
+  const imageBase = `../${course.image.card}`;
   const finalFallbackImage = '../assets/img/course-fallback.jpg';
 
   return `
     <div class="col-12 col-md-6 col-lg-4 mb-4">
-      <div class="card h-100 shadow-sm course-card" 
-            data-rating="${course.rating}" 
-            data-students="${course.students}" 
-            data-date="${course.date}" 
-            data-category="${course.category}" 
+      <div class="card h-100 shadow-sm course-card"
+            data-rating="${course.rating}"
+            data-students="${course.students}"
+            data-date="${course.date}"
+            data-category="${course.category}"
             data-level="${course.level}">
         <div class="course-card-img-container">
           <picture>
-            <source srcset="${imageBase}-small.webp 350w, ${imageBase}-large.webp 700w" 
-                    sizes="(max-width: 767px) 95vw, (max-width: 991px) 48vw, 32vw" 
+            <source srcset="${imageBase}-small.webp 350w, ${imageBase}-large.webp 700w"
+                    sizes="(max-width: 767px) 95vw, (max-width: 991px) 48vw, 32vw"
                     type="image/webp">
-            
+
             <source srcset="${imageBase}-large.jpg"
                     type="image/jpeg">
-            
-            <img class="img-fluid card-img-top" 
-                  src="${imageBase}-large.jpg"  
-                  alt="${course.title}" 
+
+            <img class="img-fluid card-img-top"
+                  src="${imageBase}-large.jpg"
+                  alt="${course.title}"
                   onerror="this.onerror=null; this.src='${finalFallbackImage}';"
                   width="400" height="210">
           </picture>
@@ -296,7 +136,7 @@ function createCourseCard(course) {
   document.addEventListener("DOMContentLoaded", () => {
     const resultsCol = qs(".col-lg-9.mt-3") || qs(".col-lg-9");
     const container = resultsCol ? qs(".row", resultsCol) : null;
-    
+
     if (!resultsCol || !container) {
       console.error("Course container not found.");
       return;
@@ -341,33 +181,33 @@ function createCourseCard(course) {
       return courses.filter(course => {
         // Rating filter
         if (course.rating < filters.minRating) return false;
-        
+
         // Search filter
         if (filters.searchTerm && !course.title.toLowerCase().includes(filters.searchTerm)) {
           return false;
         }
-        
+
         // Level filter
-        if (filters.selectedLevel && 
-            filters.selectedLevel !== "" && 
-            filters.selectedLevel.toLowerCase() !== "all" && 
+        if (filters.selectedLevel &&
+            filters.selectedLevel !== "" &&
+            filters.selectedLevel.toLowerCase() !== "all" &&
             course.level !== filters.selectedLevel) {
           return false;
         }
-        
+
         // Category filter
-        if (filters.activeCategories.length > 0 && 
+        if (filters.activeCategories.length > 0 &&
             !filters.activeCategories.includes(course.category)) {
           return false;
         }
-        
+
         return true;
       });
     }
 
     function applySort(courses) {
       const sortType = (currentSort.type || "").toLowerCase();
-      
+
       switch (sortType) {
         case "title a-z":
           return courses.sort((a, b) => a.title.localeCompare(b.title));
@@ -393,10 +233,10 @@ function createCourseCard(course) {
       const label = sortBtn.querySelector(".sort-label");
       const match = sortItems.find(it => (it.innerText || "").trim().toLowerCase() === currentSort.type);
       const text = match ? (match.innerText || "").trim() : defaultSortText;
-      
-      if (label) label.textContent = text; 
+
+      if (label) label.textContent = text;
       else sortBtn.textContent = text;
-      
+
       sortItems.forEach(it => it.classList.remove("active"));
       if (match) match.classList.add("active");
     }
@@ -417,7 +257,7 @@ function createCourseCard(course) {
           if (checkbox && span) {
             const count = counts[checkbox.value] || 0;
             span.innerText = count.toString();
-            
+
             // Disable empty categories
             if (count === 0) {
               item.classList.add('text-muted');
@@ -437,7 +277,7 @@ function createCourseCard(course) {
     function renderPagination(totalItems) {
       const paginationBar = qs("#pagination-bar");
       if (!paginationBar) return;
-      
+
       paginationBar.innerHTML = "";
       const totalPages = Math.ceil(totalItems / CONFIG.CARDS_PER_PAGE);
       if (totalPages <= 1) return;
@@ -481,48 +321,48 @@ function createCourseCard(course) {
         params.set('search', filters.searchTerm);
       }
 
-      const newUrl = params.toString() ? 
-        `${window.location.pathname}?${params.toString()}` : 
+      const newUrl = params.toString() ?
+        `${window.location.pathname}?${params.toString()}` :
         window.location.pathname;
-      
+
       history.replaceState({path: newUrl}, '', newUrl);
     }
 
     // === MAIN PROCESSING FUNCTION ===
     function processAndRender(resetPage = false) {
       toggleSpinner(true);
-      
+
       if (resetPage) currentPage = 1;
 
       setTimeout(() => {
         const filters = readFilters();
-        
+
         // Start with all courses
         let allCourses = ContentManager.getCourses();
-        
+
         // Apply filters EXCEPT category (for count calculation)
         let preFiltered = allCourses.filter(course => {
           if (course.rating < filters.minRating) return false;
           if (filters.searchTerm && !course.title.toLowerCase().includes(filters.searchTerm)) return false;
-          if (filters.selectedLevel && 
-              filters.selectedLevel !== "" && 
-              filters.selectedLevel.toLowerCase() !== "all" && 
+          if (filters.selectedLevel &&
+              filters.selectedLevel !== "" &&
+              filters.selectedLevel.toLowerCase() !== "all" &&
               course.level !== filters.selectedLevel) return false;
           return true;
         });
-        
+
         // Update category counts based on pre-filtered results
         updateCategoryCounts(preFiltered);
-        
+
         // Now apply category filter
         let filtered = preFiltered.filter(course => {
-          return filters.activeCategories.length === 0 || 
+          return filters.activeCategories.length === 0 ||
                  filters.activeCategories.includes(course.category);
         });
-        
+
         // Apply sorting
         filtered = applySort([...filtered]);
-        
+
         // Pagination
         const total = filtered.length;
         const start = (currentPage - 1) * CONFIG.CARDS_PER_PAGE;
@@ -545,7 +385,7 @@ function createCourseCard(course) {
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = courseHTML;
             const courseElement = tempDiv.firstElementChild;
-            
+
             // Add staggered animation
             courseElement.style.animationDelay = `${index * 0.1}s`;
             container.appendChild(courseElement);
@@ -568,10 +408,10 @@ function createCourseCard(course) {
     // === RESET FUNCTION ===
     function performReset() {
       if (searchInput) searchInput.value = "";
-      
+
       qsa(".form-check-input").forEach(input => {
         if (input.type === "radio") {
-          input.checked = (input.name === "ratingFilter" && input.value === "0") || 
+          input.checked = (input.name === "ratingFilter" && input.value === "0") ||
                          (input.name === "levelFilter" && (input.value === "" || input.value.toLowerCase() === "all"));
         } else {
           input.checked = false;
@@ -581,7 +421,7 @@ function createCourseCard(course) {
       // Reset mobile filters too
       const mobileSearch = qs("#search-input-mobile");
       if (mobileSearch) mobileSearch.value = "";
-      
+
       qsa("#mobileFilters input").forEach(input => {
         if (input.type === "radio") {
           input.checked = input.value === "" || input.value.toLowerCase() === "all" || input.value === "0";
@@ -596,7 +436,7 @@ function createCourseCard(course) {
     }
 
     // === EVENT LISTENERS ===
-    
+
     // Reset button
     if (resetBtn) resetBtn.addEventListener("click", performReset);
 
@@ -608,13 +448,13 @@ function createCourseCard(course) {
     // Auto-apply mode
     if (CONFIG.AUTO_APPLY) {
       if (applyBtn) applyBtn.disabled = true;
-      
+
       // Search input with debouncing
       if (searchInput) {
         const debouncedSearch = debounce(() => processAndRender(true), CONFIG.DEBOUNCE_DELAY);
         searchInput.addEventListener("input", debouncedSearch);
       }
-      
+
       // Filter inputs
       qsa(".form-check-input").forEach(input => {
         input.addEventListener("change", () => processAndRender(true));
@@ -646,7 +486,7 @@ function createCourseCard(course) {
 
     // === INITIALIZATION ===
     updateSortUI();
-    
+
     // Apply URL filters if any
     const params = new URLSearchParams(window.location.search);
     if (params.has('categories') || params.has('rating') || params.has('level') || params.has('search')) {
@@ -677,7 +517,7 @@ function createCourseCard(course) {
         searchInput.value = decodeURIComponent(search);
       }
     }
-    
+
     processAndRender(true);
   });
 
@@ -713,7 +553,7 @@ function createCourseCard(course) {
     },
 
     getCourses: () => ContentManager.getCourses(),
-    
+
     bulkUpdate: (updates) => {
       updates.forEach(update => {
         if (update.id) {
@@ -751,4 +591,3 @@ function createCourseCard(course) {
   console.log('- quickAddCourse("Course Name", "Category", 25.99)');
 
 })();
-
