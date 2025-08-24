@@ -12,7 +12,7 @@
   // === UTILITIES ===
   const qs = (s, r = document) => r.querySelector(s);
   const qsa = (s, r = document) => Array.from(r.querySelectorAll(s));
-
+  
   const debounce = (func, wait) => {
     let timeout;
     return function executedFunction(...args) {
@@ -73,31 +73,31 @@
 function createCourseCard(course) {
   const priceDisplay = course.price === 0 ? 'Free' : `$${course.price.toFixed(2)}`;
   const priceClass = course.price === 0 ? 'text-success' : 'text-primary';
-
-  const imageBase = `../${course.image.card}`;
+  
+  const imageBase = `../${course.image.card}`; 
   const finalFallbackImage = '../assets/img/course-fallback.jpg';
 
   return `
     <div class="col-12 col-md-6 col-lg-4 mb-4">
-      <div class="card h-100 shadow-sm course-card"
-            data-rating="${course.rating}"
-            data-students="${course.students}"
-            data-date="${course.date}"
-            data-category="${course.category}"
+      <div class="card h-100 shadow-sm course-card" 
+            data-rating="${course.rating}" 
+            data-students="${course.students}" 
+            data-date="${course.date}" 
+            data-category="${course.category}" 
             data-level="${course.level}">
         <div class="course-card-img-container">
           <picture>
             <source srcset="${imageBase}-small.webp 350w, ${imageBase}-large.webp 700w" 
-   	  	     sizes="(max-width: 767px) 95vw, (max-width: 991px) 48vw, 32vw" 
-	        		type="image/webp">
-
+                    sizes="(max-width: 767px) 95vw, (max-width: 991px) 48vw, 32vw" 
+                    type="image/webp">
+            
             <source srcset="${imageBase}-small.jpg 350w, ${imageBase}-large.jpg 700w"
                     sizes="(max-width: 767px) 95vw, (max-width: 991px) 48vw, 32vw"
                     type="image/jpeg">
-
-            <img class="img-fluid card-img-top"
-                  src="${imageBase}-large.jpg"
-                  alt="${course.title}"
+            
+            <img class="img-fluid card-img-top" 
+                  src="${imageBase}-large.jpg"  
+                  alt="${course.title}" 
                   onerror="this.onerror=null; this.src='${finalFallbackImage}';"
                   width="400" height="210"
                   loading="lazy" fetchpriority="low" decoding="async">
@@ -150,7 +150,7 @@ function optimizeVisibleImages() {
   document.addEventListener("DOMContentLoaded", () => {
     const resultsCol = qs(".col-lg-9.mt-3") || qs(".col-lg-9");
     const container = resultsCol ? qs(".row", resultsCol) : null;
-
+    
     if (!resultsCol || !container) {
       console.error("Course container not found.");
       return;
@@ -191,37 +191,10 @@ function optimizeVisibleImages() {
       return { minRating, searchTerm, activeCategories, selectedLevel };
     }
 
-    function applyFilters(courses, filters) {
-      return courses.filter(course => {
-        // Rating filter
-        if (course.rating < filters.minRating) return false;
-
-        // Search filter
-        if (filters.searchTerm && !course.title.toLowerCase().includes(filters.searchTerm)) {
-          return false;
-        }
-
-        // Level filter
-        if (filters.selectedLevel &&
-            filters.selectedLevel !== "" &&
-            filters.selectedLevel.toLowerCase() !== "all" &&
-            course.level !== filters.selectedLevel) {
-          return false;
-        }
-
-        // Category filter
-        if (filters.activeCategories.length > 0 &&
-            !filters.activeCategories.includes(course.category)) {
-          return false;
-        }
-
-        return true;
-      });
-    }
 
     function applySort(courses) {
       const sortType = (currentSort.type || "").toLowerCase();
-
+      
       switch (sortType) {
         case "title a-z":
           return courses.sort((a, b) => a.title.localeCompare(b.title));
@@ -247,10 +220,10 @@ function optimizeVisibleImages() {
       const label = sortBtn.querySelector(".sort-label");
       const match = sortItems.find(it => (it.innerText || "").trim().toLowerCase() === currentSort.type);
       const text = match ? (match.innerText || "").trim() : defaultSortText;
-
-      if (label) label.textContent = text;
+      
+      if (label) label.textContent = text; 
       else sortBtn.textContent = text;
-
+      
       sortItems.forEach(it => it.classList.remove("active"));
       if (match) match.classList.add("active");
     }
@@ -271,7 +244,7 @@ function optimizeVisibleImages() {
           if (checkbox && span) {
             const count = counts[checkbox.value] || 0;
             span.innerText = count.toString();
-
+            
             // Disable empty categories
             if (count === 0) {
               item.classList.add('text-muted');
@@ -291,7 +264,7 @@ function optimizeVisibleImages() {
     function renderPagination(totalItems) {
       const paginationBar = qs("#pagination-bar");
       if (!paginationBar) return;
-
+      
       paginationBar.innerHTML = "";
       const totalPages = Math.ceil(totalItems / CONFIG.CARDS_PER_PAGE);
       if (totalPages <= 1) return;
@@ -335,48 +308,54 @@ function optimizeVisibleImages() {
         params.set('search', filters.searchTerm);
       }
 
-      const newUrl = params.toString() ?
-        `${window.location.pathname}?${params.toString()}` :
+      const newUrl = params.toString() ? 
+        `${window.location.pathname}?${params.toString()}` : 
         window.location.pathname;
-
+      
       history.replaceState({path: newUrl}, '', newUrl);
     }
 
     // === MAIN PROCESSING FUNCTION ===
     function processAndRender(resetPage = false) {
       toggleSpinner(true);
-
+      
       if (resetPage) currentPage = 1;
 
       setTimeout(() => {
         const filters = readFilters();
-
+        
         // Start with all courses
         let allCourses = ContentManager.getCourses();
-
+        
         // Apply filters EXCEPT category (for count calculation)
         let preFiltered = allCourses.filter(course => {
           if (course.rating < filters.minRating) return false;
-          if (filters.searchTerm && !course.title.toLowerCase().includes(filters.searchTerm)) return false;
-          if (filters.selectedLevel &&
-              filters.selectedLevel !== "" &&
-              filters.selectedLevel.toLowerCase() !== "all" &&
+          if (filters.searchTerm) {
+            const titleMatch = course.title.toLowerCase().includes(filters.searchTerm);
+            const tagMatch = course.tags && course.tags.some(tag => tag.toLowerCase().includes(filters.searchTerm));
+            if (!titleMatch && !tagMatch) {
+              return false;
+            }
+          }
+          if (filters.selectedLevel && 
+              filters.selectedLevel !== "" && 
+              filters.selectedLevel.toLowerCase() !== "all" && 
               course.level !== filters.selectedLevel) return false;
           return true;
         });
-
+        
         // Update category counts based on pre-filtered results
         updateCategoryCounts(preFiltered);
-
+        
         // Now apply category filter
         let filtered = preFiltered.filter(course => {
-          return filters.activeCategories.length === 0 ||
+          return filters.activeCategories.length === 0 || 
                  filters.activeCategories.includes(course.category);
         });
-
+        
         // Apply sorting
         filtered = applySort([...filtered]);
-
+        
         // Pagination
         const total = filtered.length;
         const start = (currentPage - 1) * CONFIG.CARDS_PER_PAGE;
@@ -399,7 +378,7 @@ function optimizeVisibleImages() {
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = courseHTML;
             const courseElement = tempDiv.firstElementChild;
-
+            
             // Add staggered animation
             courseElement.style.animationDelay = `${index * 0.1}s`;
             container.appendChild(courseElement);
@@ -423,10 +402,10 @@ function optimizeVisibleImages() {
     // === RESET FUNCTION ===
     function performReset() {
       if (searchInput) searchInput.value = "";
-
+      
       qsa(".form-check-input").forEach(input => {
         if (input.type === "radio") {
-          input.checked = (input.name === "ratingFilter" && input.value === "0") ||
+          input.checked = (input.name === "ratingFilter" && input.value === "0") || 
                          (input.name === "levelFilter" && (input.value === "" || input.value.toLowerCase() === "all"));
         } else {
           input.checked = false;
@@ -436,7 +415,7 @@ function optimizeVisibleImages() {
       // Reset mobile filters too
       const mobileSearch = qs("#search-input-mobile");
       if (mobileSearch) mobileSearch.value = "";
-
+      
       qsa("#mobileFilters input").forEach(input => {
         if (input.type === "radio") {
           input.checked = input.value === "" || input.value.toLowerCase() === "all" || input.value === "0";
@@ -451,7 +430,7 @@ function optimizeVisibleImages() {
     }
 
     // === EVENT LISTENERS ===
-
+    
     // Reset button
     if (resetBtn) resetBtn.addEventListener("click", performReset);
 
@@ -463,13 +442,13 @@ function optimizeVisibleImages() {
     // Auto-apply mode
     if (CONFIG.AUTO_APPLY) {
       if (applyBtn) applyBtn.disabled = true;
-
+      
       // Search input with debouncing
       if (searchInput) {
         const debouncedSearch = debounce(() => processAndRender(true), CONFIG.DEBOUNCE_DELAY);
         searchInput.addEventListener("input", debouncedSearch);
       }
-
+      
       // Filter inputs
       qsa(".form-check-input").forEach(input => {
         input.addEventListener("change", () => processAndRender(true));
@@ -501,7 +480,7 @@ function optimizeVisibleImages() {
 
     // === INITIALIZATION ===
     updateSortUI();
-
+    
     // Apply URL filters if any
     const params = new URLSearchParams(window.location.search);
     if (params.has('categories') || params.has('rating') || params.has('level') || params.has('search')) {
@@ -532,7 +511,7 @@ function optimizeVisibleImages() {
         searchInput.value = decodeURIComponent(search);
       }
     }
-
+    
     processAndRender(true);
   });
 
@@ -568,7 +547,7 @@ function optimizeVisibleImages() {
     },
 
     getCourses: () => ContentManager.getCourses(),
-
+    
     bulkUpdate: (updates) => {
       updates.forEach(update => {
         if (update.id) {
