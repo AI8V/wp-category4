@@ -197,12 +197,8 @@ function optimizeVisibleImages() {
         if (course.rating < filters.minRating) return false;
 
         // Search filter
-        if (filters.searchTerm) {
-          const titleMatch = course.title.toLowerCase().includes(filters.searchTerm);
-          const tagMatch = course.tags && course.tags.some(tag => tag.toLowerCase().includes(filters.searchTerm));
-          if (!titleMatch && !tagMatch) {
-            return false;
-          }
+        if (filters.searchTerm && !course.title.toLowerCase().includes(filters.searchTerm)) {
+          return false;
         }
 
         // Level filter
