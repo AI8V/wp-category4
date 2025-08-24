@@ -91,6 +91,10 @@ function createCourseCard(course) {
    	  	     sizes="(max-width: 767px) 95vw, (max-width: 991px) 48vw, 32vw" 
 	        		type="image/webp">
 
+            <source srcset="${imageBase}-small.jpg 350w, ${imageBase}-large.jpg 700w"
+                    sizes="(max-width: 767px) 95vw, (max-width: 991px) 48vw, 32vw"
+                    type="image/jpeg">
+
 	        	<source srcset="${imageBase}-small.jpg 350w, ${imageBase}-large.jpg 700w"
     	    	  sizes="(max-width: 767px) 95vw, (max-width: 991px) 48vw, 32vw"
     	  	    type="image/jpeg">
