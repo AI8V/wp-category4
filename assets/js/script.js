@@ -196,7 +196,7 @@ function optimizeVisibleImages() {
         // Rating filter
         if (course.rating < filters.minRating) return false;
 
-        / Search filter
+        // Search filter
         if (filters.searchTerm) {
           const titleMatch = course.title.toLowerCase().includes(filters.searchTerm);
           const tagMatch = course.tags && course.tags.some(tag => tag.toLowerCase().includes(filters.searchTerm));
